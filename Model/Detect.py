@@ -15,6 +15,22 @@ import json
             'Timestamp' : string
         }]
 """
+'''
+    Below is the input after preprocessing of data
+    
+    json_input = {
+    "Fwd Seg Size Min":20,
+    "Flow IAT Min":13,
+    "Src Port":50018,
+    "Tot Fwd Pkts":3,
+    "Init Bwd Win Byts":149,
+    "new_SRC_IP":4367,
+    "new_DST_IP":3370,
+    "new_Timestamp":46713}
+'''
+
+''' REMOVE # COMMENTS AFTER CREATING AND JOINING FRONT-END
+    AND REMOVE X=inputSet'''
 
 def detectDdos(json_input):
     inputSet = pd.DataFrame(pd.json_normalize(json_input))
@@ -30,6 +46,6 @@ def detectDdos(json_input):
         
     return model.predict(inputSet)
 
-json_input = json.loads('{"Fwd Seg Size Min":20,"Flow IAT Min":13,"Src Port":50018,"Tot Fwd Pkts":3,"Init Bwd Win Byts":149,"new_SRC_IP":4367,"new_DST_IP":3370,"new_Timestamp":46713}')
+#json_input = json.loads('{"Fwd Seg Size Min":20,"Flow IAT Min":13,"Src Port":50018,"Tot Fwd Pkts":3,"Init Bwd Win Byts":149,"new_SRC_IP":4367,"new_DST_IP":3370,"new_Timestamp":46713}')
 
-print(detectDdos(json_input))
+#print(detectDdos(json_input))
