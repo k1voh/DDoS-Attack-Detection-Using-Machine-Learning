@@ -34,7 +34,6 @@ import json
 
 def detectDdos(json_input):
     inputSet = pd.DataFrame(pd.json_normalize(json_input))
-    
     inputSet['new_SRC_IP'] = LabelEncoder().fit_transform(inputSet['Src IP'])
     inputSet['new_DST_IP'] = LabelEncoder().fit_transform(inputSet['Dst IP'])
     inputSet['new_Timestamp'] = LabelEncoder().fit_transform(inputSet['Timestamp'])
