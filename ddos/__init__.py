@@ -1,7 +1,11 @@
 from flask import Flask
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app = Flask(__name__)
+app.config['SECRET_KEY']=os.getenv('SECRET_KEY')
+app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv('RECAPTCHA_PUBLIC_KEY')
+app.config['RECAPTCHA_PRIVATE_KEY'] = os.getenv('RECAPTCHA_PRIVATE_KEY')
 
-@app.route('/')
-def home():
-    return '<h1>Hello World</h1>'
+from ddos.routes import *

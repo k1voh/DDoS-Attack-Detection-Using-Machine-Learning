@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import render_template
 from ddos import app
+from ddos.forms import * 
 
 @app.route('/')
 def home():
-    return '<h1>Hello World</h1>'
+    form=SubmitForm()
+    return render_template('home.html',form=form)
