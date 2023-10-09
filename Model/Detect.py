@@ -32,16 +32,25 @@ import json
 ''' REMOVE '#' AFTER CREATING AND JOINING FRONT-END
     AND REMOVE X=inputSet'''
 
-def detectDdos(inputSet):
+def detectDdos(jsonInp):
+    json_dict = {'Fwd Seg Size Min':[0],'Flow IAT Min':[0],'Src Port':[0],'Tot Fwd Pkts':[0],'Init Bwd Win Byts':[0],'Src IP':[""],'Dst IP':[""],'Timestamp':["16/02/2018 11:25:34 PM"]}
+    jsonVal = json.loads(jsonInp)
+    print(type(jsonVal))
+    
+    for attribute,value in jsonVal.items():
+        json_dict[attribute]=value
+    print(json_dict)
+    
+    inputSet = pd.DataFrame(json_dict)
     inputSet['new_SRC_IP'] = LabelEncoder().fit_transform(inputSet['Src IP'])
     inputSet['new_DST_IP'] = LabelEncoder().fit_transform(inputSet['Dst IP'])
     inputSet['new_Timestamp'] = LabelEncoder().fit_transform(inputSet['Timestamp'])
     
     X = inputSet.drop(['Timestamp','Src IP','Dst IP'], axis='columns')
     with open("Model/Detect_DDoS.pickle", "rb") as pickle_model:
-        model = pickle.load(pickle_model)
-        
-    return model.predict(X)
+        model = pickle.load(pickle_model)  
+    result = model.predict(X)
+    return result
 
 ''' REMOVE BELOW CODE AFTER FRONT-END '''
 
