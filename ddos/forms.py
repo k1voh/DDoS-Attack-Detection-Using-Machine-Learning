@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm,RecaptchaField
-from wtforms import FileField,StringField,SubmitField,IntegerField,FloatField
+from wtforms import StringField,SubmitField,IntegerField,FloatField
 from wtforms.validators import DataRequired
 
 class SubmitForm(FlaskForm):
