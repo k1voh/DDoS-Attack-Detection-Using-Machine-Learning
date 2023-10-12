@@ -3,18 +3,6 @@ from sklearn.preprocessing import LabelEncoder
 import pickle
 import json
 
-"""
-        json_input = [{
-            'Fwd Seg Size Min' : integer,
-            'Flow IAT Min' : integer,
-            'Src Port' : integer,
-            'Tot Fwd Pkts' : integer,
-            'Init Bwd Win Byts' : integer,
-            'Src IP' : string,
-            'Dst IP' : string,
-            'Timestamp' : string
-        }]
-"""
 '''
     Below is the input after preprocessing of data
     
