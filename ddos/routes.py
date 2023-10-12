@@ -31,5 +31,3 @@ def home():
             flash("BEWARE! The system prone to DDoS attack for the given parameters!")
         print("Result:",value)
     return render_template('home.html',form=form)
-
-# Sample Changes
