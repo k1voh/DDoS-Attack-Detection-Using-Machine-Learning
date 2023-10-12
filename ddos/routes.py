@@ -26,7 +26,7 @@ def home():
         result = detectDdos(json.dumps(rendered_object))
         value=result[0]
         if value=='Benign':
-            flash("The system is safe for the given parameters!")
+            flash("SAFE! The system is in benign state for the given parameters!")
         else:
             flash("BEWARE! The system prone to DDoS attack for the given parameters!")
         print("Result:",value)
