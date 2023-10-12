@@ -44,8 +44,8 @@ def detectDdos(json_input):
     with open("E:\Language\DDoS Attack Detection\Model\Detect_DDoS.pickle", "rb") as pickle_model:
         model = pickle.load(pickle_model)
         
-    return model.predict(inputSet)
+    return model.predict(X)
 
-#json_input = json.loads('{"Fwd Seg Size Min":20,"Flow IAT Min":13,"Src Port":50018,"Tot Fwd Pkts":3,"Init Bwd Win Byts":149,"new_SRC_IP":4367,"new_DST_IP":3370,"new_Timestamp":46713}')
+json_input = json.loads('{"Fwd Seg Size Min":20,"Flow IAT Min":13,"Src Port":50018,"Tot Fwd Pkts":3,"Init Bwd Win Byts":149,"new_SRC_IP":4367,"new_DST_IP":3370,"new_Timestamp":46713}')
 
-#print(detectDdos(json_input))
+print(detectDdos(json_input))
