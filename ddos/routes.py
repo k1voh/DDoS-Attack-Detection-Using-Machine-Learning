@@ -1,4 +1,4 @@
-from flask import render_template,request,flash,jsonify
+from flask import render_template,request,flash
 from ddos import app
 from ddos.forms import * 
 from Model.Detect import detectDdos

@@ -35,7 +35,6 @@ import json
 def detectDdos(jsonInp):
     json_dict = {'Fwd Seg Size Min':[0],'Flow IAT Min':[0],'Src Port':[0],'Tot Fwd Pkts':[0],'Init Bwd Win Byts':[0],'Src IP':[""],'Dst IP':[""],'Timestamp':["16/02/2018 11:25:34 PM"]}
     jsonVal = json.loads(jsonInp)
-    print(type(jsonVal))
     
     for attribute,value in jsonVal.items():
         json_dict[attribute]=value
