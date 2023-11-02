@@ -19,10 +19,7 @@ def home():
         rendered_object['Src IP']=[form.src_ip.data]
         rendered_object['Dst IP']=[form.dst_ip.data]
         rendered_object['Timestamp']=[form.timestamp.data]
-        form.fwd_seg_size_min.data,form.flow_iat_min.data="",""
-        form.src_port.data,form.tot_fwd_pkts.data="",""
-        form.init_bwd_win_bytes.data,form.src_ip.data="",""
-        form.dst_ip.data,form.timestamp.data="",""
+
         result = detectDdos(json.dumps(rendered_object))
         value=result[0]
         if value=='Benign':

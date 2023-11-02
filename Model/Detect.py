@@ -2,6 +2,9 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import pickle
 import json
+from sklearn.exceptions import InconsistentVersionWarning
+import warnings
+warnings.simplefilter("error", InconsistentVersionWarning)
 
 '''
     Below is the input after preprocessing of data
@@ -21,7 +24,7 @@ import json
     AND REMOVE X=inputSet'''
 
 def detectDdos(jsonInp):
-    json_dict = {'Fwd Seg Size Min':[0],'Flow IAT Min':[0],'Src Port':[0],'Tot Fwd Pkts':[0],'Init Bwd Win Byts':[0],'Src IP':[""],'Dst IP':[""],'Timestamp':["16/02/2018 11:25:34 PM"]}
+    json_dict = {'Fwd Seg Size Min':[0],'Flow IAT Min':[0],'Src Port':[0],'Tot Fwd Pkts':[0],'Init Bwd Win Byts':[0],'Src IP':[""],'Dst IP':[""],'Timestamp':["16/02/2018 11:28:14 PM"]}
     jsonVal = json.loads(jsonInp)
     
     for attribute,value in jsonVal.items():
@@ -29,13 +32,17 @@ def detectDdos(jsonInp):
     print(json_dict)
     
     inputSet = pd.DataFrame(json_dict)
-    inputSet['new_SRC_IP'] = LabelEncoder().fit_transform(inputSet['Src IP'])
-    inputSet['new_DST_IP'] = LabelEncoder().fit_transform(inputSet['Dst IP'])
-    inputSet['new_Timestamp'] = LabelEncoder().fit_transform(inputSet['Timestamp'])
+    inputSet['new_SRC_IP'] = [''.join(x.split(".")) for x in inputSet['Src IP']]
+    inputSet['new_DST_IP'] = [''.join(x.split(".")) for x in inputSet['Dst IP']]
+    inputSet['new_Timestamp'] = [''.join((x.split()[0]).split("/"))+''.join(((x.split()[1]).split(":"))[0]) for x in inputSet['Timestamp']]
     
     X = inputSet.drop(['Timestamp','Src IP','Dst IP'], axis='columns')
     with open("Model/Detect_DDoS.pickle", "rb") as pickle_model:
-        model = pickle.load(pickle_model)  
+        try:
+            model = pickle.load(pickle_model)  
+        except InconsistentVersionWarning as w:
+            print(w.original_sklearn_version)
+    print(X)   
     result = model.predict(X)
     return result
 
